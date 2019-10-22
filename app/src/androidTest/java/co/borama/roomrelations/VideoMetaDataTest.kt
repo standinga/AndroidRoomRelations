@@ -43,10 +43,10 @@ class ListCategoryDaoTest {
                 VideoBookmark(3, path, 3)
         )
         val inputVideoData = VideoData("path")
+        videoDataDao.insert(inputVideoData)
         inputBookmarks.forEach {
             videoBookmarkDao.insert(it)
         }
-        videoDataDao.insert(inputVideoData)
         val videoMetaData = videoDataDao.getVideoMetaData(path).blockingObserve()
         assertEquals(path, videoMetaData!!.videoData.path)
         assertEquals(inputBookmarks.size, videoMetaData.bookmarks.size)
